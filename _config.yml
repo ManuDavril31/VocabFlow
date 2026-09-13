@@ -1,5 +1,7 @@
 title: VocabFlow - Aprende Vocabulario en Inglés
 description: Aplicación mobile-first para aprender y memorizar vocabulario en inglés mediante repetición espaciada.
+baseurl: "/VocabFlow"
+url: "https://manudavril31.github.io"
 permalink: /:basename/
 markdown: kramdown
 plugins:
