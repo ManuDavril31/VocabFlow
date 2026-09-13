@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 250" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg_gather" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#14532d"/>
+      <stop offset="100%" stop-color="#166534"/>
+    </linearGradient>
+    <filter id="glow_gather" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+  <!-- Background Card -->
+  <rect width="400" height="250" rx="20" fill="url(#bg_gather)"/>
+  <!-- Decorative Grid / Aura -->
+  <circle cx="200" cy="125" r="90" fill="none" stroke="#4ade80" stroke-width="1" opacity="0.15" stroke-dasharray="6,6"/>
+  <circle cx="340" cy="30" r="70" fill="#4ade80" opacity="0.05"/>
+  <circle cx="50" cy="220" r="50" fill="#4ade80" opacity="0.05"/>
+  <!-- Main Visual Illustration -->
+  <g filter="url(#glow_gather)">
+    
+      <!-- Converging elements / community circle -->
+      <circle cx="200" cy="125" r="55" fill="none" stroke="#22c55e" stroke-width="2" stroke-dasharray="8,6"/>
+      <circle cx="200" cy="125" r="18" fill="#4ade80"/>
+      <!-- Orbiting nodes gathering inside -->
+      <circle cx="160" cy="100" r="12" fill="#86efac"/>
+      <circle cx="240" cy="100" r="12" fill="#86efac"/>
+      <circle cx="160" cy="150" r="12" fill="#86efac"/>
+      <circle cx="240" cy="150" r="12" fill="#86efac"/>
+      <!-- Arrows moving toward center -->
+      <path d="M175 110 L 190 120" stroke="#15803d" stroke-width="2" stroke-linecap="round"/>
+      <path d="M225 110 L 210 120" stroke="#15803d" stroke-width="2" stroke-linecap="round"/>
+    
+  </g>
+</svg>

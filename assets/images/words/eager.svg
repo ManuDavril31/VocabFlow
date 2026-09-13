@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 250" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg_eager" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#701a75"/>
+      <stop offset="100%" stop-color="#86198f"/>
+    </linearGradient>
+    <filter id="glow_eager" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+  <!-- Background Card -->
+  <rect width="400" height="250" rx="20" fill="url(#bg_eager)"/>
+  <!-- Decorative Grid / Aura -->
+  <circle cx="200" cy="125" r="90" fill="none" stroke="#f472b6" stroke-width="1" opacity="0.15" stroke-dasharray="6,6"/>
+  <circle cx="340" cy="30" r="70" fill="#f472b6" opacity="0.05"/>
+  <circle cx="50" cy="220" r="50" fill="#f472b6" opacity="0.05"/>
+  <!-- Main Visual Illustration -->
+  <g filter="url(#glow_eager)">
+    
+      <!-- Excited spark / energetic jumping figure -->
+      <circle cx="200" cy="70" r="16" fill="#fdf2f8" stroke="#ec4899" stroke-width="3"/>
+      <!-- Energetic dynamic limbs -->
+      <path d="M180 100 L 200 86 L 220 100" stroke="#f472b6" stroke-width="4" stroke-linecap="round"/>
+      <line x1="200" y1="86" x2="200" y2="135" stroke="#f472b6" stroke-width="4" stroke-linecap="round"/>
+      <path d="M185 170 L 200 135 L 215 170" stroke="#f472b6" stroke-width="4" stroke-linecap="round"/>
+      <!-- Enthusiasm aura sparkles -->
+      <circle cx="160" cy="60" r="5" fill="#fbbf24"/>
+      <circle cx="240" cy="60" r="5" fill="#fbbf24"/>
+      <circle cx="150" cy="110" r="4" fill="#fbbf24"/>
+      <circle cx="250" cy="110" r="4" fill="#fbbf24"/>
+    
+  </g>
+</svg>

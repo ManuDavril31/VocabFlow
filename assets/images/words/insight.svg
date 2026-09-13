@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 250" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg_insight" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2e1065"/>
+      <stop offset="100%" stop-color="#3b0764"/>
+    </linearGradient>
+    <filter id="glow_insight" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+  <!-- Background Card -->
+  <rect width="400" height="250" rx="20" fill="url(#bg_insight)"/>
+  <!-- Decorative Grid / Aura -->
+  <circle cx="200" cy="125" r="90" fill="none" stroke="#e879f9" stroke-width="1" opacity="0.15" stroke-dasharray="6,6"/>
+  <circle cx="340" cy="30" r="70" fill="#e879f9" opacity="0.05"/>
+  <circle cx="50" cy="220" r="50" fill="#e879f9" opacity="0.05"/>
+  <!-- Main Visual Illustration -->
+  <g filter="url(#glow_insight)">
+    
+      <!-- Glowing lightbulb with eye inside (deep sight) -->
+      <path d="M180 150 C 170 140, 160 120, 160 100 C 160 78, 178 60, 200 60 C 222 60, 240 78, 240 100 C 240 120, 230 140, 220 150 Z" fill="#7e22ce" stroke="#d946ef" stroke-width="3"/>
+      <rect x="185" y="152" width="30" height="12" rx="3" fill="#a855f7"/>
+      <!-- Inner spark -->
+      <circle cx="200" cy="100" r="10" fill="#fdf4ff"/>
+      <!-- Radiant rays -->
+      <line x1="200" y1="40" x2="200" y2="25" stroke="#f0abfc" stroke-width="3" stroke-linecap="round"/>
+      <line x1="150" y1="60" x2="140" y2="50" stroke="#f0abfc" stroke-width="3" stroke-linecap="round"/>
+      <line x1="250" y1="60" x2="260" y2="50" stroke="#f0abfc" stroke-width="3" stroke-linecap="round"/>
+      <line x1="135" y1="100" x2="120" y2="100" stroke="#f0abfc" stroke-width="3" stroke-linecap="round"/>
+      <line x1="265" y1="100" x2="280" y2="100" stroke="#f0abfc" stroke-width="3" stroke-linecap="round"/>
+    
+  </g>
+</svg>

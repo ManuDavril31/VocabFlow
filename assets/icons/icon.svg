@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="vocabGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4f46e5"/>
+      <stop offset="100%" stop-color="#06b6d4"/>
+    </linearGradient>
+    <filter id="dropShadow" x="-10%" y="-10%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="#000000" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+  <!-- Background with rounded corners -->
+  <rect width="512" height="512" rx="128" fill="url(#vocabGrad)"/>
+  
+  <!-- Subtle inner glow ring -->
+  <circle cx="256" cy="256" r="220" fill="none" stroke="rgba(255, 255, 255, 0.12)" stroke-width="4"/>
+
+  <!-- Card graphic -->
+  <g filter="url(#dropShadow)">
+    <rect x="116" y="136" width="280" height="240" rx="32" fill="#ffffff"/>
+    
+    <!-- Word bar accent -->
+    <rect x="156" y="180" width="130" height="24" rx="12" fill="#4f46e5"/>
+    <!-- Phonetic sub-line -->
+    <rect x="156" y="220" width="80" height="12" rx="6" fill="#94a3b8"/>
+    
+    <!-- Speaker symbol -->
+    <path d="M160 270 h18 l22 18 v-48 l-22 18 h-18 z" fill="#6366f1"/>
+    <path d="M208 250 a14 14 0 0 1 0 16" fill="none" stroke="#6366f1" stroke-width="4" stroke-linecap="round"/>
+    <path d="M214 242 a24 24 0 0 1 0 32" fill="none" stroke="#6366f1" stroke-width="4" stroke-linecap="round"/>
+    
+    <!-- Checkmark accent in top right -->
+    <circle cx="352" cy="176" r="20" fill="#10b981"/>
+    <path d="M344 176 l6 6 l10 -12" fill="none" stroke="#ffffff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+</svg>

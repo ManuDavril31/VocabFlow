@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 250" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg_unwind" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#14532d"/>
+      <stop offset="100%" stop-color="#166534"/>
+    </linearGradient>
+    <filter id="glow_unwind" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+  <!-- Background Card -->
+  <rect width="400" height="250" rx="20" fill="url(#bg_unwind)"/>
+  <!-- Decorative Grid / Aura -->
+  <circle cx="200" cy="125" r="90" fill="none" stroke="#86efac" stroke-width="1" opacity="0.15" stroke-dasharray="6,6"/>
+  <circle cx="340" cy="30" r="70" fill="#86efac" opacity="0.05"/>
+  <circle cx="50" cy="220" r="50" fill="#86efac" opacity="0.05"/>
+  <!-- Main Visual Illustration -->
+  <g filter="url(#glow_unwind)">
+    
+      <!-- Cozy steaming mug / relaxing moment -->
+      <path d="M170 100 H230 V145 C230 165 215 175 200 175 C185 175 170 165 170 145 Z" fill="#15803d" stroke="#86efac" stroke-width="3"/>
+      <!-- Handle -->
+      <path d="M230 115 H245 C252 115 255 125 255 135 C255 145 248 150 230 150" fill="none" stroke="#86efac" stroke-width="3"/>
+      <!-- Rising steam waves -->
+      <path d="M185 90 Q 190 75 185 60" fill="none" stroke="#bbf7d0" stroke-width="2.5" stroke-linecap="round"/>
+      <path d="M200 90 Q 205 70 200 50" fill="none" stroke="#bbf7d0" stroke-width="2.5" stroke-linecap="round"/>
+      <path d="M215 90 Q 220 75 215 60" fill="none" stroke="#bbf7d0" stroke-width="2.5" stroke-linecap="round"/>
+    
+  </g>
+</svg>

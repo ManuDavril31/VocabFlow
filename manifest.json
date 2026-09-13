@@ -1,0 +1,19 @@
+{
+  "name": "VocabFlow - Aprende Inglés",
+  "short_name": "VocabFlow",
+  "description": "Aplicación mobile-first para aprender y memorizar vocabulario en inglés mediante repetición espaciada.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#4f46e5",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "assets/icons/icon.svg",
+      "sizes": "192x192 512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["education", "productivity"]
+}

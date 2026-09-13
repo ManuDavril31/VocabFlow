@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 250" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg_reliable" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0c4a6e"/>
+      <stop offset="100%" stop-color="#0369a1"/>
+    </linearGradient>
+    <filter id="glow_reliable" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+  <!-- Background Card -->
+  <rect width="400" height="250" rx="20" fill="url(#bg_reliable)"/>
+  <!-- Decorative Grid / Aura -->
+  <circle cx="200" cy="125" r="90" fill="none" stroke="#38bdf8" stroke-width="1" opacity="0.15" stroke-dasharray="6,6"/>
+  <circle cx="340" cy="30" r="70" fill="#38bdf8" opacity="0.05"/>
+  <circle cx="50" cy="220" r="50" fill="#38bdf8" opacity="0.05"/>
+  <!-- Main Visual Illustration -->
+  <g filter="url(#glow_reliable)">
+    
+      <!-- Strong anchor and shield -->
+      <path d="M200 60 L245 80 V130 C245 160 200 180 200 180 C200 180 155 160 155 130 V80 Z" fill="#0284c7" stroke="#38bdf8" stroke-width="3"/>
+      <!-- Checkmark of trust inside shield -->
+      <polyline points="180,120 195,135 225,105" fill="none" stroke="#f8fafc" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+      <!-- Foundation base -->
+      <rect x="130" y="175" width="140" height="10" rx="5" fill="#38bdf8" opacity="0.4"/>
+    
+  </g>
+</svg>

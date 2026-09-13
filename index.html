@@ -1,0 +1,503 @@
+---
+layout: default
+title: VocabFlow - Aprende Vocabulario en Inglés Mobile-First
+description: Aplicación mobile-first para aprender y memorizar vocabulario en inglés mediante repetición espaciada.
+---
+
+<!-- ========================================== -->
+<!-- VISTA 1: INICIO (HOME DASHBOARD)           -->
+<!-- ========================================== -->
+<section class="view-section active" id="view-home">
+  <header class="home-greeting">
+    <h1 class="home-title">VocabFlow</h1>
+    <p class="home-subtitle" id="homeSubtitle">Oxford 5000 &bull; Vocabulario oficial con audio nativo y repetición espaciada</p>
+  </header>
+
+  <!-- Selector de Colección / Mazo Activo -->
+  <div class="deck-selector-card">
+    <div class="deck-selector-row">
+      <div class="deck-selector-icon">
+        <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none">
+          <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+          <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+        </svg>
+      </div>
+      <div class="deck-selector-info">
+        <span class="deck-selector-label">Colección Activa</span>
+        <select id="selectActiveDeck" class="deck-dropdown" aria-label="Seleccionar colección activa">
+          <option value="nation">4000 Essential English Words (Libro Unificado • 3,600 palabras)</option>
+          <option value="oxford">Oxford 5000 Oficial (5,948 palabras • CEFR A1-C1)</option>
+        </select>
+      </div>
+    </div>
+    <div class="level-pills-row" id="deckLevelSelector">
+      <!-- Píldoras de nivel dinámicas generadas en app.js -->
+    </div>
+  </div>
+
+  <!-- Tarjeta Hero de Dosis Diaria (10 Palabras) -->
+  <article class="hero-study-card">
+    <div class="hero-badge">
+      <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2.5" fill="none">
+        <circle cx="12" cy="12" r="10"></circle>
+        <polyline points="12 6 12 12 16 14"></polyline>
+      </svg>
+      Dosis Diaria • 10 Palabras
+    </div>
+    <div class="hero-number" id="heroDueCount">10</div>
+    <p class="hero-desc" id="heroBatchStatusText">0 de 10 palabras completadas hoy</p>
+    
+    <!-- Barra de progreso diario -->
+    <div class="hero-progress-track">
+      <div class="hero-progress-fill" id="heroProgressBar" style="width: 0%;"></div>
+    </div>
+
+    <button class="btn-hero-start" id="btnHeroStartStudy" aria-label="Comenzar sesión diaria">
+      <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="2.5" fill="none">
+        <polygon points="5 3 19 12 5 21 5 3"></polygon>
+      </svg>
+      <span id="heroBtnLabel">Comenzar Dosis de Hoy</span>
+    </button>
+  </article>
+
+  <!-- Métricas Rápidas -->
+  <div class="stats-grid-two">
+    <div class="stat-pill-card">
+      <div class="stat-pill-header">
+        <svg viewBox="0 0 24 24" width="16" height="16" stroke="#f59e0b" stroke-width="2" fill="none">
+          <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"></path>
+        </svg>
+        Racha actual
+      </div>
+      <div class="stat-pill-value" id="homeStreakDays">1 🔥</div>
+    </div>
+
+    <div class="stat-pill-card">
+      <div class="stat-pill-header">
+        <svg viewBox="0 0 24 24" width="16" height="16" stroke="#10b981" stroke-width="2" fill="none">
+          <polyline points="20 6 9 17 4 12"></polyline>
+        </svg>
+        Repasadas hoy
+      </div>
+      <div class="stat-pill-value" id="homeTodayCount">0 palabras</div>
+    </div>
+  </div>
+
+  <!-- Acceso rápido a modo de opción múltiple -->
+  <button class="btn-hero-start" id="btnQuickQuizMode" style="background-color: var(--bg-card); color: var(--text-primary); border: 1px solid var(--border-subtle);">
+    <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none">
+      <rect x="3" y="3" width="7" height="7"></rect>
+      <rect x="14" y="3" width="7" height="7"></rect>
+      <rect x="14" y="14" width="7" height="7"></rect>
+      <rect x="3" y="14" width="7" height="7"></rect>
+    </svg>
+    Practicar Ejercicio Rápido (Quiz)
+  </button>
+</section>
+
+<!-- ========================================== -->
+<!-- VISTA 2: PALABRAS / VOCABULARIO            -->
+<!-- ========================================== -->
+<section class="view-section" id="view-words">
+  <header style="margin-bottom: 12px; display: flex; justify-content: space-between; align-items: flex-start; gap: 8px;">
+    <div>
+      <h2 style="font-size: 1.5rem; font-weight: 800; color: var(--text-primary);">Banco de Vocabulario</h2>
+      <p style="color: var(--text-secondary); font-size: 0.9rem;" id="wordsSubtitle">Explora, edita o añade palabras a tu colección</p>
+    </div>
+    <button class="btn-hero-start" id="btnAddNewWord" style="margin: 0; padding: 8px 14px; min-height: 40px; font-size: 0.85rem; border-radius: 9999px; gap: 6px; white-space: nowrap;" aria-label="Añadir nueva palabra">
+      <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2.5" fill="none">
+        <line x1="12" y1="5" x2="12" y2="19"></line>
+        <line x1="5" y1="12" x2="19" y2="12"></line>
+      </svg>
+      <span>+ Añadir</span>
+    </button>
+  </header>
+
+  <!-- Selector de Colección en Banco de Palabras -->
+  <div class="deck-selector-card" style="margin-bottom: 14px; padding: 12px 14px;">
+    <div class="deck-selector-row">
+      <div class="deck-selector-icon" style="width: 36px; height: 36px;">
+        <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none">
+          <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+          <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+        </svg>
+      </div>
+      <div class="deck-selector-info">
+        <span class="deck-selector-label">Colección Activa</span>
+        <select id="selectWordsDeck" class="deck-dropdown" aria-label="Cambiar colección de vocabulario">
+          <option value="nation">4000 Essential English Words (Libro Unificado • 3,600 palabras)</option>
+          <option value="oxford">Oxford 5000 Oficial (5,948 palabras • CEFR A1-C1)</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- Buscador optimizado para teclado móvil -->
+  <div class="search-wrapper">
+    <svg class="search-icon" viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none">
+      <circle cx="11" cy="11" r="8"></circle>
+      <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+    </svg>
+    <input 
+      type="text" 
+      id="wordsSearchInput"
+      class="search-input" 
+      placeholder="Buscar palabra o traducción..." 
+      autocomplete="off" 
+      autocapitalize="none" 
+      spellcheck="false" 
+      inputmode="text">
+  </div>
+
+  <!-- Filtros táctiles en scroll horizontal suave -->
+  <div class="category-pills-scroll" id="wordsCategoryPills">
+    <button class="pill-chip active" data-filter="all">Todas</button>
+  </div>
+
+  <!-- Lista vertical de palabras -->
+  <div class="words-list-container" id="wordsListContainer">
+    <!-- Renderizado dinámico desde app.js -->
+  </div>
+</section>
+
+<!-- ========================================== -->
+<!-- VISTA 3: ESTUDIAR (PANTALLA CRÍTICA)       -->
+<!-- ========================================== -->
+<section class="view-section" id="view-study">
+  
+  <!-- Contenedor activo de tarjeta de estudio -->
+  <div class="study-screen-container" id="studyViewContent">
+    
+    <!-- Cabecera de estudio móvil ergonómica -->
+    <div>
+      <div class="study-header">
+        <button class="icon-button btn-nav-back" aria-label="Volver al inicio">
+          <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2.5" fill="none">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+        </button>
+
+        <span class="study-progress-counter" id="studyRemainingCounter">10 restantes</span>
+
+        <button class="icon-button" id="btnStudyMenu" aria-label="Opciones de estudio">
+          <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="2" fill="none">
+            <circle cx="12" cy="12" r="1"></circle>
+            <circle cx="12" cy="5" r="1"></circle>
+            <circle cx="12" cy="19" r="1"></circle>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Barra de progreso superior continua -->
+      <div class="study-progress-track">
+        <div class="study-progress-bar" id="studyProgressBar"></div>
+      </div>
+    </div>
+
+    <!-- TARJETA PRINCIPAL DE ESTUDIO TÁCTIL (SWIPEABLE) -->
+    <article class="study-card" id="studyCard">
+      <!-- Badges de feedback para gestos Swipe -->
+      <span class="swipe-indicator hard" id="indicatorHard">Difícil 👈</span>
+      <span class="swipe-indicator good" id="indicatorGood">Bien 👆</span>
+      <span class="swipe-indicator easy" id="indicatorEasy">👉 Fácil</span>
+
+      <!-- Imagen Mnemotécnica (Dual Coding Theory) -->
+      <div class="card-image-wrap" id="cardImageWrap">
+        <img id="cardImage" class="card-image" src="" alt="Ilustración mnemotécnica">
+      </div>
+
+      <!-- Palabra Dominante con badge POS y botón de edición directa -->
+      <div style="display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 6px;">
+        <div class="word-dominance" id="cardWordDominance">agree</div>
+        <span class="pos-badge" id="cardPosBadge">v.</span>
+        <button class="icon-button" id="btnEditStudyWord" style="width: 32px; height: 32px; color: var(--text-muted); background: rgba(255,255,255,0.05); border: 1px solid var(--border-subtle); border-radius: 9999px;" aria-label="Editar esta palabra">
+          <svg viewBox="0 0 24 24" width="15" height="15" stroke="currentColor" stroke-width="2" fill="none">
+            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Fonética IPA y Botón de Audio -->
+      <div class="phonetics-wrapper">
+        <span class="ipa-text" id="cardIpaText">/ǝgrí:/</span>
+        <button class="btn-audio-pill" id="btnPlayAudio" aria-label="Escuchar pronunciación nativa">
+          <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2.2" fill="none">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+            <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Definición Pedagógica en Inglés (Inmersión Anki) -->
+      <div class="definition-box" id="cardDefinitionBox">
+        <p class="definition-text" id="cardDefinitionText">
+          To agree is to have the same opinion or belief as another person.
+        </p>
+      </div>
+
+      <!-- Oración de Contexto con espacio en blanco (Active Recall / Cloze) -->
+      <div class="sentence-box">
+        <p class="sentence-text" id="cardSentenceMasked">
+          The students <span class="sentence-masked-blank">______</span> they have too much homework.
+        </p>
+      </div>
+
+      <!-- CONTENIDO REVELADO TRAS PULSAR "MOSTRAR RESPUESTA" -->
+      <div class="revealed-content" id="cardRevealedContent">
+        <div class="card-divider"></div>
+        
+        <div class="translation-box-container">
+          <span class="translation-label-tag">🇪🇸 Traducción al Español</span>
+          <div class="translation-highlight" id="cardTranslation">
+            pedir prestado
+          </div>
+        </div>
+
+        <div class="sentence-revealed-wrap">
+          <p class="sentence-highlighted" id="cardSentenceFull">
+            Can I <strong>borrow</strong> your phone?
+          </p>
+          <button class="btn-audio-pill btn-sentence-audio" id="btnPlaySentenceAudio" aria-label="Escuchar oración completa">
+            <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2.2" fill="none">
+              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+              <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+            </svg>
+          </button>
+        </div>
+        
+        <div class="sentence-trans-box">
+          <span class="sentence-trans-label">🇪🇸 Frase en Español</span>
+          <p class="sentence-translation" id="cardSentenceTrans">
+            ¿Puedo pedir prestado tu teléfono?
+          </p>
+        </div>
+
+        <!-- Colocaciones Comunes -->
+        <div class="collocations-box" id="cardCollocationsWrap">
+          <div class="collocations-label">Colocaciones frecuentes:</div>
+          <div class="collocations-tags" id="cardCollocationsList"></div>
+        </div>
+
+        <div class="card-divider"></div>
+        <p class="rating-prompt">¿Cómo la recordaste?</p>
+      </div>
+    </article>
+
+    <!-- ÁREA DE ACCIÓN INFERIOR (ZONA CÓMODA DEL PULGAR) -->
+    <div class="study-action-bar">
+      <!-- Botón Grande Principal -->
+      <button class="btn-reveal" id="btnRevealAnswer">
+        <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="2.2" fill="none">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="16" x2="12" y2="12"></line>
+          <line x1="12" y1="8" x2="12.01" y2="8"></line>
+        </svg>
+        Mostrar respuesta
+      </button>
+
+      <!-- Botonera de Dificultad SRS (Al revelarse) -->
+      <div class="rating-buttons-group" id="ratingButtonsGroup">
+        <button class="btn-rating btn-rating-hard" id="btnRateHard">
+          <span>Difícil</span>
+          <span class="sub-hint">&lt; 10 min</span>
+        </button>
+        
+        <button class="btn-rating btn-rating-good" id="btnRateGood">
+          <span>Bien</span>
+          <span class="sub-hint">1 día</span>
+        </button>
+
+        <button class="btn-rating btn-rating-easy" id="btnRateEasy">
+          <span>Fácil</span>
+          <span class="sub-hint">3 días</span>
+        </button>
+      </div>
+
+      <!-- Modo Ejercicio Opción Múltiple (Alternativo) -->
+      <div class="quiz-options-list" id="quizOptionsList" style="display: none;">
+        <!-- Se renderizan los 4 botones grandes -->
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Pantalla de Felicitaciones / Sesión Terminada -->
+  <div class="study-screen-container" id="studyCompletionView" style="display: none; justify-content: center;">
+    <div class="completion-card">
+      <div class="completion-icon">🎉</div>
+      <h2 class="completion-title">¡Dosis de Hoy Completada!</h2>
+      <p class="completion-desc">
+        Has completado tus <strong>10 palabras diarias</strong>. Tu memoria a largo plazo se consolida mediante repetición espaciada.
+      </p>
+      <div class="completion-streak-badge" id="completionStreakBadge" style="margin: 12px 0; font-size: 1.1rem; color: #f59e0b; font-weight: 700;">
+        Racha activa: 1 día 🔥
+      </div>
+      <button class="btn-reveal" id="btnRestartSession" style="margin-top: 16px;">
+        Repasar 10 palabras adicionales
+      </button>
+      <button class="btn-rating btn-rating-good btn-nav-back" style="width: 100%; min-height: 50px;">
+        Volver al Inicio
+      </button>
+    </div>
+  </div>
+
+</section>
+
+<!-- ========================================== -->
+<!-- VISTA 4: PROGRESO Y MÉTRICAS              -->
+<!-- ========================================== -->
+<section class="view-section" id="view-progress">
+  <header style="margin-bottom: 20px;">
+    <h2 style="font-size: 1.5rem; font-weight: 800; color: var(--text-primary);">Tu Progreso</h2>
+    <p style="color: var(--text-secondary); font-size: 0.9rem;">Consolidación de memoria y estadísticas SRS</p>
+  </header>
+
+  <!-- Indicador de retención -->
+  <div class="progress-header-stat">
+    <div class="retention-rate-title">Índice de Retención Estimada</div>
+    <div class="retention-large-number" id="progressRetentionRate">75%</div>
+  </div>
+
+  <div class="stats-grid-two">
+    <div class="stat-pill-card">
+      <div class="stat-pill-header">Racha activa</div>
+      <div class="stat-pill-value" id="progressStreakDays">1 día</div>
+    </div>
+    <div class="stat-pill-card">
+      <div class="stat-pill-header">Total repasos</div>
+      <div class="stat-pill-value" id="progressTotalReviews">0</div>
+    </div>
+  </div>
+
+  <!-- Barras de Repetición Espaciada (Cajas 1 a 5) -->
+  <div class="srs-distribution-card">
+    <h3 class="section-subtitle">Distribución del Sistema Leitner</h3>
+    <div class="srs-bars-stack">
+      
+      <div class="srs-level-row">
+        <div class="srs-level-label-wrap">
+          <span>Caja 1: Nuevas / Difíciles</span>
+          <span id="srsCount1">0</span>
+        </div>
+        <div class="srs-bar-bg"><div class="srs-bar-fill" id="srsBar1"></div></div>
+      </div>
+
+      <div class="srs-level-row">
+        <div class="srs-level-label-wrap">
+          <span>Caja 2: En Aprendizaje</span>
+          <span id="srsCount2">0</span>
+        </div>
+        <div class="srs-bar-bg"><div class="srs-bar-fill" id="srsBar2"></div></div>
+      </div>
+
+      <div class="srs-level-row">
+        <div class="srs-level-label-wrap">
+          <span>Caja 3: Repaso Regular</span>
+          <span id="srsCount3">0</span>
+        </div>
+        <div class="srs-bar-bg"><div class="srs-bar-fill" id="srsBar3"></div></div>
+      </div>
+
+      <div class="srs-level-row">
+        <div class="srs-level-label-wrap">
+          <span>Caja 4: Avanzadas</span>
+          <span id="srsCount4">0</span>
+        </div>
+        <div class="srs-bar-bg"><div class="srs-bar-fill" id="srsBar4"></div></div>
+      </div>
+
+      <div class="srs-level-row">
+        <div class="srs-level-label-wrap">
+          <span>Caja 5: Dominadas</span>
+          <span id="srsCount5">0</span>
+        </div>
+        <div class="srs-bar-bg"><div class="srs-bar-fill" id="srsBar5"></div></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ========================================== -->
+<!-- VISTA 5: CONFIGURACIÓN                     -->
+<!-- ========================================== -->
+<section class="view-section" id="view-settings">
+  <header style="margin-bottom: 20px;">
+    <h2 style="font-size: 1.5rem; font-weight: 800; color: var(--text-primary);">Configuración</h2>
+    <p style="color: var(--text-secondary); font-size: 0.9rem;">Personaliza tu experiencia de estudio móvil</p>
+  </header>
+
+  <div class="settings-group">
+    <!-- Modo Oscuro -->
+    <div class="settings-item">
+      <div class="settings-info">
+        <span class="settings-label">Modo Oscuro</span>
+        <span class="settings-desc">Ideal para menor fatiga visual en pantallas OLED</span>
+      </div>
+      <label class="switch-toggle" aria-label="Alternar tema oscuro">
+        <input type="checkbox" id="settingsToggleTheme" checked>
+        <span class="slider-round"></span>
+      </label>
+    </div>
+
+    <!-- Pronunciación Automática -->
+    <div class="settings-item">
+      <div class="settings-info">
+        <span class="settings-label">Auto-reproducir Audio</span>
+        <span class="settings-desc">Reproduce la voz al revelar la tarjeta</span>
+      </div>
+      <label class="switch-toggle" aria-label="Auto-reproducir audio">
+        <input type="checkbox" id="settingsToggleAudio" checked>
+        <span class="slider-round"></span>
+      </label>
+    </div>
+
+    <!-- Gestos Táctiles Swipe -->
+    <div class="settings-item">
+      <div class="settings-info">
+        <span class="settings-label">Gestos Táctiles (Swipe)</span>
+        <span class="settings-desc">Deslizar para calificar (Izquierda/Arriba/Derecha)</span>
+      </div>
+      <label class="switch-toggle" aria-label="Alternar gestos táctiles">
+        <input type="checkbox" id="settingsToggleGestures" checked>
+        <span class="slider-round"></span>
+      </label>
+    </div>
+  </div>
+
+  <div class="settings-group">
+    <!-- Velocidad de Voz -->
+    <div class="settings-item">
+      <div class="settings-info">
+        <span class="settings-label">Velocidad de pronunciación</span>
+        <span class="settings-desc">Ajusta la velocidad del sintetizador nativo</span>
+      </div>
+      <select class="select-native" id="settingsSelectSpeed" aria-label="Velocidad de pronunciación">
+        <option value="0.75">Lento (0.75x)</option>
+        <option value="0.9" selected>Normal (0.9x)</option>
+        <option value="1.0">Rápido (1.0x)</option>
+      </select>
+    </div>
+
+    <!-- Modo de Estudio Preferido -->
+    <div class="settings-item">
+      <div class="settings-info">
+        <span class="settings-label">Modo de estudio</span>
+        <span class="settings-desc">Tipo de ejercicio durante las sesiones</span>
+      </div>
+      <select class="select-native" id="settingsStudyMode" aria-label="Modo de estudio preferido">
+        <option value="flashcards" selected>Flashcards con valoración</option>
+        <option value="quiz">Cuestionario Opción Múltiple</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Zona de peligro / Reinicio -->
+  <div class="settings-group">
+    <button class="btn-rating btn-rating-hard" id="btnResetData" style="width: 100%; min-height: 48px;">
+      Reiniciar Progreso de Aprendizaje
+    </button>
+  </div>
+</section>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#0b0f19">
+  <meta name="description" content="{{ page.description | default: site.description }}">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="{{ site.title }}">
+  
+  <title>{{ page.title | default: site.title }}</title>
+
+  <!-- PWA Manifest & Favicon -->
+  <link rel="manifest" href="{{ '/manifest.json' | relative_url }}">
+  <link rel="icon" type="image/svg+xml" href="{{ '/assets/icons/icon.svg' | relative_url }}">
+  <link rel="apple-touch-icon" href="{{ '/assets/icons/icon.svg' | relative_url }}">
+
+  <!-- Estilos Mobile-First -->
+  <link rel="stylesheet" href="{{ '/assets/css/mobile-first.css?v=11' | relative_url }}">
+</head>
+<body>
+  <div class="app-viewport">
+    
+    <!-- CONTENIDO PRINCIPAL DE LA VISTA -->
+    <main class="main-content" id="appMainContent">
+      {{ content }}
+    </main>
+
+    <!-- Barra de Navegación Inferior Fija (Bottom Nav) -->
+    {% include bottom-nav.html %}
+
+    <!-- Modales Inferiores (Bottom Sheets) -->
+    {% include word-detail-modal.html %}
+    {% include word-form-modal.html %}
+
+  </div>
+
+  <!-- Scripts Modulares -->
+  <script src="{{ '/assets/js/decks-manifest.js?v=11' | relative_url }}"></script>
+  <script src="{{ '/assets/js/words.js?v=11' | relative_url }}"></script>
+  <script src="{{ '/assets/js/storage.js?v=11' | relative_url }}"></script>
+  <script src="{{ '/assets/js/study.js?v=11' | relative_url }}"></script>
+  <script src="{{ '/assets/js/app.js?v=11' | relative_url }}"></script>
+</body>
+</html>

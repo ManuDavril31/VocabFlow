@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 250" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg_journey" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#064e3b"/>
+      <stop offset="100%" stop-color="#047857"/>
+    </linearGradient>
+    <filter id="glow_journey" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+  <!-- Background Card -->
+  <rect width="400" height="250" rx="20" fill="url(#bg_journey)"/>
+  <!-- Decorative Grid / Aura -->
+  <circle cx="200" cy="125" r="90" fill="none" stroke="#a7f3d0" stroke-width="1" opacity="0.15" stroke-dasharray="6,6"/>
+  <circle cx="340" cy="30" r="70" fill="#a7f3d0" opacity="0.05"/>
+  <circle cx="50" cy="220" r="50" fill="#a7f3d0" opacity="0.05"/>
+  <!-- Main Visual Illustration -->
+  <g filter="url(#glow_journey)">
+    
+      <!-- Winding path leading to horizon with sun -->
+      <circle cx="200" cy="70" r="30" fill="#fef08a" opacity="0.8"/>
+      <!-- Mountains on horizon -->
+      <polygon points="100,120 160,80 220,120" fill="#065f46"/>
+      <polygon points="180,120 240,75 300,120" fill="#047857"/>
+      <!-- S-curve road extending to viewer -->
+      <path d="M195 110 Q 180 140 215 160 Q 235 175 190 200 L 210 200 Q 260 175 235 155 Q 200 135 205 110 Z" fill="#6ee7b7"/>
+    
+  </g>
+</svg>

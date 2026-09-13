@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 250" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg_pivotal" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#0284c7"/>
+    </linearGradient>
+    <filter id="glow_pivotal" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+  <!-- Background Card -->
+  <rect width="400" height="250" rx="20" fill="url(#bg_pivotal)"/>
+  <!-- Decorative Grid / Aura -->
+  <circle cx="200" cy="125" r="90" fill="none" stroke="#bae6fd" stroke-width="1" opacity="0.15" stroke-dasharray="6,6"/>
+  <circle cx="340" cy="30" r="70" fill="#bae6fd" opacity="0.05"/>
+  <circle cx="50" cy="220" r="50" fill="#bae6fd" opacity="0.05"/>
+  <!-- Main Visual Illustration -->
+  <g filter="url(#glow_pivotal)">
+    
+      <!-- Fulcrum / lever at balancing tipping point -->
+      <polygon points="200,120 180,170 220,170" fill="#0369a1" stroke="#38bdf8" stroke-width="2"/>
+      <!-- Balanced beam tilting upward -->
+      <line x1="120" y1="140" x2="280" y2="100" stroke="#f8fafc" stroke-width="5" stroke-linecap="round"/>
+      <circle cx="200" cy="120" r="6" fill="#38bdf8"/>
+      <!-- Spark of transformation on high side -->
+      <circle cx="280" cy="100" r="10" fill="#fbbf24"/>
+    
+  </g>
+</svg>

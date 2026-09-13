@@ -1,0 +1,135 @@
+<div class="modal-backdrop" id="wordFormModal" role="dialog" aria-modal="true">
+  <div class="modal-sheet" style="max-height: 90vh;">
+    <div class="sheet-handle"></div>
+    
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+      <h3 style="font-size: 1.35rem; font-weight: 800; color: var(--text-primary); margin: 0;" id="wordFormModalTitle">
+        Añadir Nueva Palabra
+      </h3>
+      <button type="button" class="icon-button" id="btnCloseWordFormModal" aria-label="Cerrar" style="width: 36px; height: 36px;">
+        <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2.2" fill="none">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+
+    <form id="wordEditorForm" onsubmit="event.preventDefault();" style="display: flex; flex-direction: column; gap: 12px;">
+      <input type="hidden" id="formWordId" value="">
+
+      <!-- Palabra y Traducción -->
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+        <div class="form-group">
+          <label class="form-label" for="formWordText">Palabra en Inglés *</label>
+          <input type="text" id="formWordText" class="form-input" placeholder="ej. cultivate" required autocomplete="off" autocapitalize="none">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="formTranslationText">Traducción al Español *</label>
+          <input type="text" id="formTranslationText" class="form-input" placeholder="ej. cultivar" required autocomplete="off">
+        </div>
+      </div>
+
+      <!-- Fonética y Categoría -->
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+        <div class="form-group">
+          <label class="form-label" for="formIpaText">Pronunciación IPA (Opcional)</label>
+          <input type="text" id="formIpaText" class="form-input" placeholder="/kʌ́ltəvèit/" autocomplete="off">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="formCategoryText">Categoría / Nivel</label>
+          <input type="text" id="formCategoryText" class="form-input" placeholder="ej. Verbos / B2" autocomplete="off">
+        </div>
+      </div>
+
+      <!-- Frase en Inglés -->
+      <div class="form-group">
+        <label class="form-label" for="formSentenceFull">Oración de Ejemplo en Inglés *</label>
+        <textarea id="formSentenceFull" class="form-textarea" rows="2" placeholder="ej. Farmers cultivate rice in the valley." required></textarea>
+        <small style="color: var(--text-muted); font-size: 0.75rem; margin-top: 2px; display: block;">
+          La palabra se enmascarará automáticamente como (______) en la tarjeta.
+        </small>
+      </div>
+
+      <!-- Frase en Español -->
+      <div class="form-group">
+        <label class="form-label" for="formSentenceTrans">Traducción de la Oración al Español *</label>
+        <textarea id="formSentenceTrans" class="form-textarea" rows="2" placeholder="ej. Los agricultores cultivan arroz en el valle." required></textarea>
+      </div>
+
+      <!-- Definición en Inglés -->
+      <div class="form-group">
+        <label class="form-label" for="formDefinition">Definición en Inglés (Opcional)</label>
+        <input type="text" id="formDefinition" class="form-input" placeholder="ej. To care for plants and help them grow.">
+      </div>
+
+      <!-- SECCIÓN IMAGEN (Subida ImgBB y Vista Previa) -->
+      <div class="form-group">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+          <label class="form-label" style="margin: 0;">Imagen Ilustrativa (Dual Coding)</label>
+          <span style="font-size: 0.72rem; color: #38bdf8; font-weight: 700;">Subida vía ImgBB API</span>
+        </div>
+
+        <!-- Input de archivo oculto -->
+        <input type="file" id="formImageFileInput" accept="image/*" style="display: none;">
+
+        <!-- Zona de Carga / Drag & Drop -->
+        <div class="imgbb-upload-zone" id="imgbbUploadDropzone">
+          <div class="imgbb-drop-content" id="imgbbDropContent">
+            <div class="imgbb-icon-circle">
+              <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="2" fill="none">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                <polyline points="21 15 16 10 5 21"></polyline>
+              </svg>
+            </div>
+            <div style="text-align: center;">
+              <button type="button" class="btn-imgbb-trigger" id="btnTriggerImgbbUpload">
+                📷 Seleccionar o Tomar Foto
+              </button>
+              <p style="font-size: 0.75rem; color: var(--text-muted); margin: 4px 0 0 0;">
+                o arrastra tu imagen aquí (subida automática a ImgBB)
+              </p>
+            </div>
+          </div>
+
+          <!-- Indicador de Subida / Spinner -->
+          <div class="imgbb-upload-loading" id="imgbbUploadLoading" style="display: none;">
+            <div class="imgbb-spinner"></div>
+            <span style="font-size: 0.85rem; font-weight: 600; color: #38bdf8;">Subiendo imagen a ImgBB...</span>
+          </div>
+        </div>
+
+        <!-- Vista Previa de Imagen Cargada -->
+        <div class="imgbb-preview-container" id="formImagePreviewWrap" style="display: none;">
+          <img id="formImagePreview" class="imgbb-preview-img" src="" alt="Vista previa">
+          <div class="imgbb-preview-actions">
+            <span class="imgbb-badge-success">✓ Subida a ImgBB</span>
+            <button type="button" class="btn-remove-img" id="btnRemoveFormImage" aria-label="Quitar imagen">
+              🗑️ Quitar imagen
+            </button>
+          </div>
+        </div>
+
+        <!-- Input URL editable / de respaldo -->
+        <input type="url" id="formImageUrl" class="form-input" placeholder="https://i.ibb.co/... o pega enlace directo" style="margin-top: 6px; font-size: 0.82rem;">
+      </div>
+
+      <!-- Botones de Acción -->
+      <div style="display: flex; gap: 8px; margin-top: 10px;">
+        <button type="button" class="btn-hero-start" id="btnSaveWordForm" style="flex: 2; margin: 0; min-height: 46px; font-size: 0.95rem;">
+          💾 Guardar
+        </button>
+
+        <button type="button" class="btn-hero-start" id="btnDeleteWordForm" style="flex: 1; margin: 0; min-height: 46px; background: rgba(239, 68, 68, 0.15); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.3); display: none;">
+          🗑️ Eliminar
+        </button>
+
+        <button type="button" class="btn-reveal" id="btnCancelWordForm" style="flex: 1; margin: 0; min-height: 46px; background: var(--bg-secondary); color: var(--text-secondary); border: 1px solid var(--border-subtle); font-size: 0.95rem;">
+          Cancelar
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

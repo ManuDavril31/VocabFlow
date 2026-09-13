@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 250" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg_tackle" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1c1917"/>
+      <stop offset="100%" stop-color="#44403c"/>
+    </linearGradient>
+    <filter id="glow_tackle" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+  <!-- Background Card -->
+  <rect width="400" height="250" rx="20" fill="url(#bg_tackle)"/>
+  <!-- Decorative Grid / Aura -->
+  <circle cx="200" cy="125" r="90" fill="none" stroke="#fb923c" stroke-width="1" opacity="0.15" stroke-dasharray="6,6"/>
+  <circle cx="340" cy="30" r="70" fill="#fb923c" opacity="0.05"/>
+  <circle cx="50" cy="220" r="50" fill="#fb923c" opacity="0.05"/>
+  <!-- Main Visual Illustration -->
+  <g filter="url(#glow_tackle)">
+    
+      <!-- Decisive arrow breaking through a barrier -->
+      <rect x="220" y="70" width="12" height="110" rx="3" fill="#78716c"/>
+      <!-- Heavy force arrow driving straight through -->
+      <line x1="120" y1="125" x2="235" y2="125" stroke="#f97316" stroke-width="6" stroke-linecap="round"/>
+      <polygon points="230,110 260,125 230,140" fill="#f97316"/>
+      <!-- Impact shockwaves -->
+      <circle cx="235" cy="125" r="20" fill="none" stroke="#fdba74" stroke-width="2" stroke-dasharray="4,4"/>
+    
+  </g>
+</svg>
